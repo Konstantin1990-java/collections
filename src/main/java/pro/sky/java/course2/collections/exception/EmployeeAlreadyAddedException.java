@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 //непроверяемое исключение которое выбрасывается, когда нового сотрудника пытаются добавить в коллекцию,
     // а в коллекции уже есть такой сотрудник
-@ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class EmployeeAlreadyAddedException extends RuntimeException {
 
     public EmployeeAlreadyAddedException(String message) {

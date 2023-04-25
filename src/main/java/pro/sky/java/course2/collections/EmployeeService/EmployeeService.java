@@ -13,36 +13,41 @@ import java.util.List;
 public class EmployeeService implements EmployeeServiceInterface {
     private final List<Employee> employees = new ArrayList<>();
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
     @Override
-    public void addEmployee(String firstName, String lastName) {
+    public Employee addEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
         if (employees.size() >= 5) {
             throw new EmployeeStorageIsFullException("В этот список нельзя добавить больше 5 сотрудников");
         }
-        if (employees.contains(new Employee(firstName, lastName))) {
+        if (employees.contains(employee)) {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует");
         }
-        employees.add(new Employee(firstName, lastName));
+        employees.add(employee);
+        return employee;
     }
 
     @Override
-    public void removeEmployee(String firstName, String lastName) {
-        if (!employees.contains(new Employee(firstName, lastName))) {
+    public Employee removeEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (!employees.contains(employee)) {
             throw new EmployeeNotFoundException("вы пытаетесь удалить сотрудника которого нет в списке");
         }
-        employees.remove(new Employee(firstName, lastName));
-
+        employees.remove(employee);
+        return employee;
     }
 
     @Override
-    public void containsEmployee(String firstName, String lastName) {
-        if (employees.contains(new Employee(firstName, lastName))) {
-            System.out.println("В нашем списке имеется сотрудник " + firstName + " " + lastName);
+    public Employee findEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(firstName, lastName);
+        if (employees.contains(employee)) {
+            return employee;
         } else {
             throw new EmployeeNotFoundException("Сотрудника нет в списке");
         }
+    }
+
+    @Override
+    public List<Employee> findAllEmployees() {
+        return employees;
     }
 }
