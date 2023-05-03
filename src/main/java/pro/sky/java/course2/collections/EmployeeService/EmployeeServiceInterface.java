@@ -2,7 +2,7 @@ package pro.sky.java.course2.collections.EmployeeService;
 
 import pro.sky.java.course2.collections.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeServiceInterface {
     Employee addEmployee(String firstName, String lastName);
@@ -11,5 +11,5 @@ public interface EmployeeServiceInterface {
 
     Employee findEmployee(String firstName, String lastName);
 
-    List<Employee> findAllEmployees();
+    Collection<Employee> findAllEmployees();
 }
